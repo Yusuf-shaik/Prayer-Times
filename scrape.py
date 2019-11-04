@@ -72,13 +72,20 @@ for time in soup.find_all('li')[5:10]:
     else:
         prayerTimes[y[0].replace(':', '').lower()] = y[1]
 
+#Print Dictionary
+print(prayerTimes,"\n")
+
+#Write info to JSON File
+with open('times.json', 'w') as file:
+    json.dump(prayerTimes, file)
+    print("*** Prayer Times Successfully Written to JSON File: times.json ***\n")
+
+#Continue to ask user for prayer time
 while True:
     prayer = input("Which prayer would you like to know the time of\n")
 
     print(prayerTimes[prayer.lower()])
-print(prayerTimes)
 
 # times=json.dumps(prayerTimes)
-with open('times.json', 'w') as file:
-    json.dump(prayerTimes, file)
+
 
