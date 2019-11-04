@@ -10,7 +10,7 @@ import pytz
 url = "http://www.whitbymasjid.ca/"
 
 #Api link for openweathermap
-url2="http://api.openweathermap.org/data/2.5/weather?q=whitby&appid=###___API_KEY_HERE___###"
+url2="http://api.openweathermap.org/data/2.5/weather?q=whitby&appid=b81347c5672e23b4e026a7533d499673"
 
 #get response from each webpage
 response2 = get(url2)
@@ -22,13 +22,21 @@ response2=response2.json()
 sunset = response2['sys']['sunset']
 
 #Add 5 minutes to sunset, convert from Universal time to Local time
-sunset = datetime.utcfromtimestamp(sunset) + timedelta(seconds=-14100)
+sunset = datetime.utcfromtimestamp(sunset) + timedelta(seconds=-17700)
 
 
 # sunset.strftime(("%I:%M %p"))
 
+# print(sunset.time().minute)
+minute=sunset.time().minute
+if len(str(minute))==1:
+    minute= "0" + str(minute)
+else:
+    minute=str(minute)
+# print(minute)
+
 #print only hour and minute of time
-sunset = str(sunset.time().hour-12) + ":" + str(sunset.time().minute)
+sunset = str(sunset.time().hour-12) + ":" + minute
 
 #regex for stripping out html tags
 regex = re.compile(r'<[^>]+>')
